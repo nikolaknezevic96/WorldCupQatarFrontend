@@ -1,0 +1,124 @@
+.center-content {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100vh; /* Full viewport height to center vertically */
+  }
+  
+  .scrollable-container {
+    overflow-x: auto;
+    width: 100%;
+    justify-content: center; 
+  }
+  
+  .scrollable-inner {
+    display: flex;
+    width: max-content;
+    justify-content: center; 
+
+    
+   
+  }
+  
+  .scrollable-ion-col {
+    min-width: 80px;
+  }
+
+
+
+  .scrollable-container1 {
+    overflow-x: auto; /* For horizontal scrolling */
+  }
+  
+  .scrollable-inner1 {
+    min-width: 700px; /* Minimum inner part width */
+  }
+  
+  .ion-col1 {
+    white-space: nowrap; 
+  }
+
+  
+  
+  .small-button {
+    font-size: 14px; 
+    --background: #f10f2e; 
+    --background-activated: #80087a; 
+    --background-focused: #dd0d64;
+    --color: #ffffff;
+     
+  }
+  
+  .small-button1 {
+    
+    --background: #f10f2e; 
+    --background-activated: #80087a; 
+    --background-focused: #dd0d64;
+    --color: #ffffff;
+     
+  }
+
+  @media (min-width: 1024px) {
+    .scrollable-container {
+      display: flex;
+      overflow-x: hidden;
+      width: 100%; 
+    }
+  
+    .scrollable-inner {
+      width: 100%;
+      width: max-content; 
+    }
+  
+ 
+    .page-content {
+      padding: 16px; 
+    }
+    
+    .select-input {
+      --padding-start: 8px; 
+      --padding-end: 8px;
+      margin-bottom: 16px; 
+    }
+    
+    .radio-group {
+      margin-bottom: 16px; 
+    }
+    
+    .match-button {
+      font-size: 1.2em; 
+      height: 50px; 
+    }
+
+
+
+    .match-button {
+      font-size: 1.2em;
+      height: 50px; 
+      width: 100%;
+    }
+    
+    .date-picker {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+       
+      margin-left: 30px; 
+    }
+
+
+ 
+
+
+  }
+
+  .smaller-button {
+    height: 30px; 
+    font-size: 12px; 
+    --padding-top: 2px;
+    --padding-bottom: 2px; 
+    --padding-start: 5px; 
+    --padding-end: 5px; 
+    line-height: 30px; 
+  }

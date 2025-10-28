@@ -1,0 +1,48 @@
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .proceed-button {
+    height: 50px; /* Increased height */
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    --background: #700e27;
+    --background-activated: #6c0797;
+    --background-focused: #6c0797;
+    --border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    --color: #ffffff;
+    margin-top: 20px; /* Add some top margin if needed */
+  }
+
+  .wide-input {
+    width: 90%; 
+    --padding-start: 10px; /* Adds padding left */
+    --padding-end: 10px; /* Adds padding right */
+  }
+
+.content-container {
+    width: 100%; 
+    max-width: 100%; 
+    margin: 0 auto; 
+   
+}
+.small-button1 {
+    
+  --background: #700e27; /* Use Ionic CSS variables for theming */
+  --background-activated: #7b1fa2; /* Darker purple on activation/hover */
+  --background-focused: #7b1fa2;
+  --color: #ffffff;
+   
+}
+
+@media (min-width: 768px) {
+    .content-container {
+        width: 50%; 
+        
+    }
+}

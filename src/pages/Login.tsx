@@ -1,0 +1,135 @@
+import React, { useState } from 'react';
+import AuthService from '../Api/AuthService'; 
+import {
+  IonContent,
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonButton,
+  IonText,
+  IonAlert
+} from '@ionic/react';
+import { useHistory } from 'react-router-dom';
+import './Login.css';
+
+
+
+    import axios, { AxiosError } from 'axios';
+
+const LoginPage: React.FC = () => {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [successMessage, setSuccessMessage] = useState<string>('');
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+  const history = useHistory();
+
+  const handleLogin = async () => {
+    if (!validateForm()) return; // Don't send if validation fails
+
+    try {
+      const response = await AuthService.login(username, password);
+      console.log("Login successful:", response);
+      
+      // Postavljanje poruke o uspehu i prikazivanje alert-a
+      setSuccessMessage('Uspešno ste se prijavili! Prebacujemo vas na glavnu stranu.');
+      setShowSuccessAlert(true);
+      
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        
+        const serverMessage = error.response.data.message || 'Došlo je do greške prilikom prijavljivanja';
+        setErrorMessage(serverMessage);
+      } else {
+        setErrorMessage('Došlo je do greške. Pokušajte ponovo.');
+      }
+
+      setShowAlert(true);
+    }
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    if (username.trim().length === 0) {
+      setErrorMessage('Korisničko ime je obavezno');
+      isValid = false;
+    } else if (password.trim().length === 0) {
+      setErrorMessage('Lozinka je obavezna');
+      isValid = false;
+    } else {
+      setErrorMessage('');
+    }
+
+    if (!isValid) {
+      setShowAlert(true);
+    }
+
+    return isValid;
+  };
+
+  const handleSuccessAlertDismiss = () => {
+    setShowSuccessAlert(false);
+    history.push('/main'); // Redirection to the main page after dismissing the alert
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Prijava</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="ion-padding">
+        <div style={{ maxWidth: '500px', margin: '0 auto', width: '100%' }}>
+          <IonItem style={{ marginTop: '70px' }}>
+            <IonLabel position="floating" style={{ marginBottom: '10px' }}>Korisničko ime</IonLabel>
+            <IonInput 
+              value={username} 
+              onIonChange={(e) => setUsername(e.detail.value!)} 
+              clearInput
+            />
+          </IonItem>
+          <IonItem>
+            <IonLabel position="floating" style={{ marginBottom: '10px' }}>Lozinka</IonLabel>
+            <IonInput 
+              type="password" 
+              value={password} 
+              onIonChange={(e) => setPassword(e.detail.value!)} 
+              clearInput
+            />
+          </IonItem>
+          <IonButton expand="block" onClick={handleLogin} className="small-button1" style={{ width: '100%', marginTop: '10px' }}>
+            Prijavi se
+          </IonButton>
+        </div>
+        {/* Error Alert */}
+        {showAlert && (
+          <IonAlert
+            isOpen={showAlert}
+            onDidDismiss={() => setShowAlert(false)}
+            header='Greška pri prijavljivanju'
+            message={errorMessage}
+            buttons={['OK']}
+          />
+        )}
+        {/* Success Alert */}
+        {showSuccessAlert && (
+          <IonAlert
+            isOpen={showSuccessAlert}
+            onDidDismiss={handleSuccessAlertDismiss}
+            header='Uspešno prijavljivanje'
+            message={successMessage}
+            buttons={['OK']}
+          />
+        )}
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default LoginPage;
