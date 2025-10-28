@@ -1,0 +1,7 @@
+{
+  "name": "qatarFrontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
